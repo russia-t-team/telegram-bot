@@ -34,8 +34,15 @@ def mat(update: Updater, context: CallbackContext):
 def russia(update: Updater, context: CallbackContext):
     update.message.reply_sticker('CAACAgIAAxkBAAEEFfliJvBGOTKSpwODa-yvxfEzQk5IVgACkgAD1U_lBYNXm1TVqDz1IwQ')
 
+
 def belorus(update: Updater, context: CallbackContext):
     update.message.reply_sticker('CAACAgIAAxkBAAEEGoBiKcICugQT_6tInDE6wuncSv7KiQACTAADHMJYFxRAZGSh7NSaIwQ')
+
+def shklyar(update: Updater, context: CallbackContext):
+    command_counter = random.randint(1, 5)
+    if command_counter == 4:
+        update.message.reply_text(
+            'ну просто реально достал твое нытье, Леха, ты же мужик, начни делать что-то')
 
 
 def main():
@@ -44,6 +51,7 @@ def main():
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(MAT_PATTERN), mat), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(RU_PATTERN), russia), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(BE_PATTERN), belorus), 0)
+    my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 1)
     my_bot.start_polling()
     my_bot.idle()
 
