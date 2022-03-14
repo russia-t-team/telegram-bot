@@ -39,8 +39,8 @@ def belorus(update: Updater, context: CallbackContext):
     update.message.reply_sticker('CAACAgIAAxkBAAEEGoBiKcICugQT_6tInDE6wuncSv7KiQACTAADHMJYFxRAZGSh7NSaIwQ')
 
 def shklyar(update: Updater, context: CallbackContext):
-    command_counter = random.randint(1, 5)
-    if command_counter == 4:
+    command_counter = random.randint(1, 10)
+    if command_counter == 9:
         update.message.reply_text(
             'ну просто реально достал твое нытье, Леха, ты же мужик, начни делать что-то')
 
