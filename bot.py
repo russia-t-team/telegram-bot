@@ -21,9 +21,13 @@ MAT_STICKERS = ['CAACAgIAAxkBAAEEFWdiJkI9efIFCAKgZn9x0WtczrrnFQACtwUAAiMFDQABLgb
                 'CAACAgIAAxkBAAEEG2liKkMGlm_U6iEc6y3Q3QZ65uz-XwACOwwAAkADwEn4aMxS-ZzfZCME',
                 'CAACAgIAAxkBAAEEG2tiKkNQFeLY83Kvezjzsa9IIwT7TQACHBkAAtjY4QABeejXDAOqS24jBA']
 
+UA_STICKERS = ['CAACAgIAAxkBAAEECn1iIOkPGHzDqt2Zv8I1g-J5o--RjwACFBYAAma5CEmQib3xor7ODCME',
+                'CAACAgQAAxkBAAEELMxiMYMQyzcfMz4D_ke8SctLXoJtWwACKAMAAlGMzwGaedJVCQ_ZOCME']
 
-def years(update: Updater, context: CallbackContext):
-    update.message.reply_sticker('CAACAgIAAxkBAAEECn1iIOkPGHzDqt2Zv8I1g-J5o--RjwACFBYAAma5CEmQib3xor7ODCME')
+
+def ukraine(update: Updater, context: CallbackContext):
+    sticker = random.choice(UA_STICKERS)
+    update.message.reply_sticker(sticker)
 
 
 def mat(update: Updater, context: CallbackContext):
@@ -47,7 +51,7 @@ def shklyar(update: Updater, context: CallbackContext):
 
 def main():
     my_bot = Updater(getenv("TOKEN"))
-    my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(UA_PATTERN), years), 0)
+    my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(UA_PATTERN), ukraine), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(MAT_PATTERN), mat), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(RU_PATTERN), russia), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(BE_PATTERN), belorus), 0)
