@@ -1,8 +1,7 @@
 import random
 import re
-from os import getenv
-
 from dotenv import load_dotenv
+from os import getenv
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
 load_dotenv()
@@ -22,33 +21,49 @@ MAT_STICKERS = ['CAACAgIAAxkBAAEEFWdiJkI9efIFCAKgZn9x0WtczrrnFQACtwUAAiMFDQABLgb
                 'CAACAgIAAxkBAAEEG2tiKkNQFeLY83Kvezjzsa9IIwT7TQACHBkAAtjY4QABeejXDAOqS24jBA']
 
 UA_STICKERS = ['CAACAgIAAxkBAAEECn1iIOkPGHzDqt2Zv8I1g-J5o--RjwACFBYAAma5CEmQib3xor7ODCME',
-                'CAACAgQAAxkBAAEELMxiMYMQyzcfMz4D_ke8SctLXoJtWwACKAMAAlGMzwGaedJVCQ_ZOCME']
+               'CAACAgQAAxkBAAEELMxiMYMQyzcfMz4D_ke8SctLXoJtWwACKAMAAlGMzwGaedJVCQ_ZOCME']
+
+RU_STICKERS = ['CAACAgIAAxkBAAEEFfliJvBGOTKSpwODa-yvxfEzQk5IVgACkgAD1U_lBYNXm1TVqDz1IwQ']
+
+BE_STICKERS = ['CAACAgIAAxkBAAEEGoBiKcICugQT_6tInDE6wuncSv7KiQACTAADHMJYFxRAZGSh7NSaIwQ']
 
 
 def ukraine(update: Updater, context: CallbackContext):
-    sticker = random.choice(UA_STICKERS)
+    sticker = get_sticker(UA_STICKERS, 3)
     update.message.reply_sticker(sticker)
+
+
+def get_sticker(stickers, max_prob):
+    command_counter = random.randint(1, max_prob)
+    if command_counter == 1:
+        return random.choice(stickers)
+    return None
 
 
 def mat(update: Updater, context: CallbackContext):
-    sticker = random.choice(MAT_STICKERS)
-    update.message.reply_sticker(sticker)
+    sticker = get_sticker(MAT_STICKERS, 3)
+    if sticker:
+        update.message.reply_sticker(sticker)
 
 
 def russia(update: Updater, context: CallbackContext):
-    update.message.reply_sticker('CAACAgIAAxkBAAEEFfliJvBGOTKSpwODa-yvxfEzQk5IVgACkgAD1U_lBYNXm1TVqDz1IwQ')
+    sticker = get_sticker(RU_STICKERS, 3)
+    if sticker:
+        update.message.reply_sticker(sticker)
 
 
 def belorus(update: Updater, context: CallbackContext):
-    update.message.reply_sticker('CAACAgIAAxkBAAEEGoBiKcICugQT_6tInDE6wuncSv7KiQACTAADHMJYFxRAZGSh7NSaIwQ')
+    sticker = get_sticker(BE_STICKERS, 3)
+    if sticker:
+        update.message.reply_sticker(sticker)
+
 
 def shklyar(update: Updater, context: CallbackContext):
-    command_counter = random.randint(1, 10)
+    command_counter = random.randint(1, 20)
     if command_counter == 4:
         update.message.reply_text('ну просто реально достало твое нытье, Леха, ты же мужик, начни делать что-то')
     if command_counter == 9:
         update.message.reply_sticker('CAACAgIAAxkBAAEEPrxiOuYWf-1OBo4nkOY-3NeCk43nzgACCxkAAqSEyUlLrhf62L85wSME')
-
 
 
 def main():
