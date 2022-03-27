@@ -44,9 +44,11 @@ def belorus(update: Updater, context: CallbackContext):
 
 def shklyar(update: Updater, context: CallbackContext):
     command_counter = random.randint(1, 10)
+    if command_counter == 4:
+        update.message.reply_text('ну просто реально достало твое нытье, Леха, ты же мужик, начни делать что-то')
     if command_counter == 9:
-        update.message.reply_text(
-            'ну просто реально достал твое нытье, Леха, ты же мужик, начни делать что-то')
+        update.message.reply_sticker('CAACAgIAAxkBAAEEPrxiOuYWf-1OBo4nkOY-3NeCk43nzgACCxkAAqSEyUlLrhf62L85wSME')
+
 
 
 def main():
