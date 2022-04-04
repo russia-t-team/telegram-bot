@@ -89,7 +89,7 @@ def weather(api_key, city_name):
               str(current_pressure) +
               ". Влажность (%) = " +
               str(current_humidity) +
-              ". description = " +
+              ". Описание = " +
               str(weather_description))
 
     else:
