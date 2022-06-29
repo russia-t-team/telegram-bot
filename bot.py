@@ -99,7 +99,8 @@ def weather(api_key, city_name):
 def weather_bot(update: Updater, context: CallbackContext):
     chelyabinsk = weather(getenv("WEATHER_TOKEN"), "Chelyabinsk")
     lissbon = weather(getenv("WEATHER_TOKEN"), "Lisbon")
-    update.message.reply_text('Челябинск: {}, Лиссабон: {}'.format(chelyabinsk, lissbon))
+    munich = weather(getenv("WEATHER_TOKEN"), "Munich")
+    update.message.reply_text('Челябинск: {}, Лиссабон: {}, Мюнхен: {}'.format(chelyabinsk, lissbon, munich))
 
 
 def ukraine(update: Updater, context: CallbackContext):
