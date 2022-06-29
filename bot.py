@@ -83,14 +83,7 @@ def weather(api_key, city_name):
         weather_description = z[0]["description"]
 
         # print following values
-        return (" Температура = " +
-              str(current_temperature) +
-              ". Атмосферное давление  = " +
-              str(current_pressure) +
-              ". Влажность (%) = " +
-              str(current_humidity) +
-              ". Описание = " +
-              str(weather_description))
+        return (str(current_temperature) + "°C. ATM " + str(current_pressure) + ". HUM " + str(current_humidity) + "%. Desc: " + str(weather_description))
 
     else:
         return "Нет данных"
