@@ -10,7 +10,7 @@ RU_REGEX = 'россия|путин|медведев|москва|царь|рф'
 UA_REGEX = 'украин|хохл|хохол|война|донбас'
 BE_REGEX = 'батьк|белорус|лукашенк'
 MAT_REGEX = r"""(?iu)\b((у|[нз]а|(хитро|не)?вз?[ыьъ]|с[ьъ]|(и|ра)[зс]ъ?|(о[тб]|под)[ьъ]?|(.\B)+?[оаеи])?-?([её]б(?!о[рй])|и[пб][ае][тц]).*?|(н[иеа]|([дп]|верт)о|ра[зс]|з?а|с(ме)?|о(т|дно)?|апч)?-?ху([яйиеёю]|ли(?!ган)).*?|(в[зы]|(три|два|четыре)жды|(н|сук)а)?-?бл(я(?!(х|ш[кн]|мб)[ауеыио]).*?|[еэ][дт]ь?)|(ра[сз]|[зн]а|[со]|вы?|п(ере|р[оие]|од)|и[зс]ъ?|[ао]т)?п[иеё]зд.*?|(за)?п[ие]д[аое]?р(ну.*?|[оа]м|(ас)?(и(ли)?[нщктл]ь?)?|(о(ч[еи])?|ас)?к(ой)|юг)[ауеы]?|манд([ауеыи](л(и[сзщ])?[ауеиы])?|ой|[ао]вошь?(е?к[ауе])?|юк(ов|[ауи])?)|муд([яаио].*?|е?н([ьюия]|ей))|мля([тд]ь)?|лять|([нз]а|по)х|м[ао]л[ао]фь([яию]|[еёо]й))\b"""
-WEATHER_REGEX = 'погода|лиссабон|дождь|снег|пасмурно'
+WEATHER_REGEX = 'погода'
 
 UA_PATTERN = re.compile(UA_REGEX, re.IGNORECASE)
 MAT_PATTERN = re.compile(MAT_REGEX, re.IGNORECASE)
@@ -83,14 +83,7 @@ def weather(api_key, city_name):
         weather_description = z[0]["description"]
 
         # print following values
-        return (" Температура = " +
-              str(current_temperature) +
-              ". Атмосферное давление  = " +
-              str(current_pressure) +
-              ". Влажность (%) = " +
-              str(current_humidity) +
-              ". Описание = " +
-              str(weather_description))
+        return (str(current_temperature) + "°C. ATM " + str(current_pressure) + ". HUM " + str(current_humidity) + "%. Desc: " + str(weather_description))
 
     else:
         return "Нет данных"
@@ -99,7 +92,8 @@ def weather(api_key, city_name):
 def weather_bot(update: Updater, context: CallbackContext):
     chelyabinsk = weather(getenv("WEATHER_TOKEN"), "Chelyabinsk")
     lissbon = weather(getenv("WEATHER_TOKEN"), "Lisbon")
-    update.message.reply_text('Челябинск: {}, Лиссабон: {}'.format(chelyabinsk, lissbon))
+    munich = weather(getenv("WEATHER_TOKEN"), "Munich")
+    update.message.reply_text('Челябинск: {}, Лиссабон: {}, Мюнхен: {}'.format(chelyabinsk, lissbon, munich))
 
 
 def ukraine(update: Updater, context: CallbackContext):
