@@ -143,8 +143,8 @@ def main():
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(MAT_PATTERN), mat), 0)
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(RU_PATTERN), russia), 0)
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(BE_PATTERN), belorus), 0)
-    my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(WEATHER_PATTERN), weather_bot), 0)
-    # my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 1)
+    my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(WEATHER_PATTERN), weather_bot), 1)
+    # my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 2)
     my_bot.start_polling()
     my_bot.idle()
 
