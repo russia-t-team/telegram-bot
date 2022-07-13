@@ -132,6 +132,10 @@ def shklyar(update: Updater, context: CallbackContext):
         update.message.reply_text('ну просто реально достало твое нытье, Леха, ты же мужик, начни делать что-то')
     if command_counter == 9:
         update.message.reply_sticker('CAACAgIAAxkBAAEEPrxiOuYWf-1OBo4nkOY-3NeCk43nzgACCxkAAqSEyUlLrhf62L85wSME')
+        
+
+def fake(update: Updater, context: CallbackContext):
+    update.message.reply_text('фейк?')
 
 
 def main():
@@ -142,6 +146,7 @@ def main():
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(BE_PATTERN), belorus), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(WEATHER_PATTERN), weather_bot), 0)
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 1)
+    my_bot.dispatcher.add_handler(MessageHandler(Filters.forwarded, fake), 11)
     my_bot.start_polling()
     my_bot.idle()
 
