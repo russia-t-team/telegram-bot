@@ -90,10 +90,13 @@ def weather(api_key, city_name):
 
 
 def weather_bot(update: Updater, context: CallbackContext):
-    chelyabinsk = weather(getenv("WEATHER_TOKEN"), "Chelyabinsk")
-    lissbon = weather(getenv("WEATHER_TOKEN"), "Lisbon")
-    munich = weather(getenv("WEATHER_TOKEN"), "Munich")
-    update.message.reply_text('Челябинск: {}, Лиссабон: {}, Мюнхен: {}'.format(chelyabinsk, lissbon, munich))
+    sities = (
+      ('Челябинск', 'Chelyabinsk'),
+      ('Лиссабон', 'Lisbon'),
+      ('Мюнхен', 'Munich'),
+    )
+    weather_message = '\n'.join(['{}: {}'.format(rus_name, weather(getenv("WEATHER_TOKEN"), int_name)) for rus_name, int_name in sities])
+    update.message.reply_text(weather_message)
 
 
 def ukraine(update: Updater, context: CallbackContext):
@@ -145,8 +148,8 @@ def main():
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(RU_PATTERN), russia), 0)
     # my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(BE_PATTERN), belorus), 0)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.regex(WEATHER_PATTERN), weather_bot), 0)
-    # my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 1)
     my_bot.dispatcher.add_handler(MessageHandler(Filters.forwarded, fake), 11)
+    # my_bot.dispatcher.add_handler(MessageHandler(Filters.user(user_id={855480940}), shklyar), 2)
     my_bot.start_polling()
     my_bot.idle()
 
