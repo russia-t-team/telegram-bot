@@ -139,7 +139,8 @@ def shklyar(update: Updater, context: CallbackContext):
         
 
 def fake(update: Updater, context: CallbackContext):
-    update.message.reply_text('фейк?')
+    if random.randint(1, 10) == 5:
+        update.message.reply_text('фейк?')
 
 
 def main():
