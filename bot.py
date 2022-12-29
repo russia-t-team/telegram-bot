@@ -95,6 +95,7 @@ def weather_bot(update: Updater, context: CallbackContext):
       ('Лиссабон', 'Lisbon'),
       ('Мюнхен', 'Munich'),
       ('Дубай', 'Dubai'),
+      ('Роли', 'Raleigh'),
     )
     weather_message = '\n'.join(['{}: {}'.format(rus_name, weather(getenv("WEATHER_TOKEN"), int_name)) for rus_name, int_name in sities])
     update.message.reply_text(weather_message)
