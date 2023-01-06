@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from os import getenv
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 import requests, json
+import datetime
 
 load_dotenv()
 RU_REGEX = 'россия|путин|медведев|москва|царь|рф'
