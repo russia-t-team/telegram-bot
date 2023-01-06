@@ -81,9 +81,11 @@ def weather(api_key, city_name):
         # to the "description" key at
         # the 0th index of z
         weather_description = z[0]["description"]
+        
+        current_time = datetime.datetime.fromtimestamp(x["dt"] + x["timezone"]).strftime('%H:%M')
 
         # print following values
-        return (str(current_temperature) + "°C. ATM " + str(current_pressure) + ". HUM " + str(current_humidity) + "%. Desc: " + str(weather_description))
+        return (str(current_temperature) + "°C. ATM " + str(current_pressure) + ". HUM " + str(current_humidity) + "%. Desc: " + str(weather_description)) + ". Time: " + current_time
 
     else:
         return "Нет данных"
