@@ -93,14 +93,20 @@ def weather(api_key, city_name):
 
 
 def weather_bot(update: Updater, context: CallbackContext):
-    sities = (
-      ('Челябинск', 'Chelyabinsk'),
-      ('Лиссабон', 'Lisbon'),
-      ('Мюнхен', 'Munich'),
-      ('Дубай', 'Dubai'),
-      ('Роли', 'Raleigh'),
-    )
-    weather_message = '\n'.join(['{}: {}'.format(rus_name, weather(getenv("WEATHER_TOKEN"), int_name)) for rus_name, int_name in sities])
+    match = re.search("(П|п)огода в (\w+)", update.message.text)
+    if match:
+        city = match.group(2)
+        weather_message = '{}: {}'.format(city, weather(getenv("WEATHER_TOKEN"), city))
+    else:
+        cities = (
+          ('Челябинск', 'Chelyabinsk'),
+          ('Лиссабон', 'Lisbon'),
+          ('Мюнхен', 'Munich'),
+          ('Дубай', 'Dubai'),
+          ('Роли', 'Raleigh'),
+        )
+        weather_message = '\n'.join(['{}: {}'.format(rus_name, weather(getenv("WEATHER_TOKEN"), int_name)) for rus_name, int_name in cities])
+
     update.message.reply_text(weather_message)
 
 
