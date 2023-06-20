@@ -62,50 +62,28 @@ def weather(api_key, city_name):
         # key in variable y
         y = x["main"]
 
-        # store the value corresponding
-        # to the "temp" key of y
-        current_temperature = y["temp"]
-
-        # store the value corresponding
-        # to the "pressure" key of y
-        current_pressure = y["pressure"]
-
-        # store the value corresponding
-        # to the "humidity" key of y
-        current_humidity = y["humidity"]
-
-        # store the value of "weather"
-        # key in variable z
-        z = x["weather"]
-
-        # store the value corresponding
-        # to the "description" key at
-        # the 0th index of z
-        weather_description = z[0]["description"]
-        
         current_time = datetime.datetime.fromtimestamp(x["dt"] + x["timezone"]).strftime('%H:%M')
 
         # print following values
-        return (str(current_temperature) + "°C. ATM " + str(current_pressure) + ". HUM " + str(current_humidity) + "%. Desc: " + str(weather_description)) + ". Time: " + current_time
+        return x["name"] + ": " + str(y["temp"]) + "°C. ATM " + str(y["pressure"]) + ". HUM " + str(y["humidity"]) + "%. Desc: " + str(x["weather"][0]["description"]) + ". Time: " + current_time
 
     else:
         return "Нет данных"
 
 
 def weather_bot(update: Updater, context: CallbackContext):
-    match = re.search("(П|п)огода в (\w+)", update.message.text)
+    match = re.search("(П|п)огода в ([\w-]+)", update.message.text)
     if match:
         city = match.group(2)
         weather_message = '{}: {}'.format(city, weather(getenv("WEATHER_TOKEN"), city))
     else:
         cities = (
-          ('Челябинск', 'Chelyabinsk'),
-          ('Лиссабон', 'Lisbon'),
-          ('Мюнхен', 'Munich'),
-          ('Дубай', 'Dubai'),
-          ('Роли', 'Raleigh'),
+          'Челябинск',
+          'Лиссабон',
+          'Мюнхен',
+          'Дубай'
         )
-        weather_message = '\n'.join(['{}: {}'.format(rus_name, weather(getenv("WEATHER_TOKEN"), int_name)) for rus_name, int_name in cities])
+        weather_message = '\n'.join([weather(getenv("WEATHER_TOKEN"), city) for city in cities])
 
     update.message.reply_text(weather_message)
 
